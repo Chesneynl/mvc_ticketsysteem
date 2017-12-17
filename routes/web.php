@@ -1,20 +1,18 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Ticket;
+use App\User;
 
 Route::get('/', function () {
-    $tickets = DB::table('users')->get();
+    $tickets = Ticket::all();
 
-    return view('home');
+    return view('home', compact('tickets'));
+});
+
+Route::get('/tickets/{ticket}', function ($id) {
+    $ticket = Ticket::find($id);
+
+    return view('ticket', compact('ticket'));
 });
 
 Route::get('about', function () {
@@ -31,11 +29,22 @@ Route::post('/login/custom', [
 ]);
 
 Route::group(['middleware' => 'auth'], function() {
+
+
   Route::get('/home', function() {
-    return view('home');
+
+    $userid = \Auth::user()->id;
+    //$user = User::find($userid);
+    $ticketDAO = new Ticket();
+    $tickets =  $ticketDAO->TicketsByUserId($userid);
+
+    return view('home', compact('tickets', 'user'));
   })->name('home');
 
   Route::get('/dashboard', function() {
-    return view('dashboard');
+
+    return view('dashboard', compact('tickets'));
   })->name('dashboard');
+
+
 });
