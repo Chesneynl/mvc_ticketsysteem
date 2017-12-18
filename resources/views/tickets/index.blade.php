@@ -9,7 +9,7 @@
             <div class="panel-body">
                 <div class="panel-title">
                     <h2>Tickets</h2>
-                    {{$user}}
+         
                 </div>
                 <div class="filters">
                   <div class="filter support col-md-4" >
@@ -22,12 +22,16 @@
                     Back-end
                   </div>
                 </div>
-                @foreach ($tickets as $ticket)
-                  <div class="ticket {{ $ticket->group  }} col-md-4 " onclick="location.href='/tickets/{{$ticket->id}}';">
-                    <div class="title">{{$ticket->name }}</div>
-                    <div class="status">{{$ticket->status }}</div>
-                  </div>
-                @endforeach
+                @if (!count($tickets))
+                    <div class="alert alert-warning">no tickets found!</div>
+                @else
+                    @foreach ($tickets as $ticket)
+                    <div class="ticket {{ $ticket->group  }} col-md-4 " onclick="location.href='/tickets/{{$ticket->id}}';">
+                        <div class="title">{{$ticket->name }}</div>
+                        <div class="status">{{$ticket->status }}</div>
+                    </div>
+                    @endforeach
+                @endif
             </div>
           </div>
       </div>

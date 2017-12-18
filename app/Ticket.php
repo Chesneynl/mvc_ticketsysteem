@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
 {
-  public function TicketsByUserId($id)
-  {
-      return Ticket::where('user_id', $id)->get()->first();
-  }
-
+    /**
+     * 
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

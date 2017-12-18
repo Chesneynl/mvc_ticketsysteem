@@ -27,10 +27,31 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function is_admin() {
-      if($this->admin) {
-        return true;
-      }
-      return false;
+    /**
+     * Check if the user is a admin
+     * 
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->admin == 1;
+    }
+
+    /**
+     * 
+     */
+    public function tickets()
+    {
+        return $this->hasMany('App\Ticket');
+    }
+
+    /**
+     * Check if the user owns the model
+     * 
+     * @return bool
+     */
+    public function owns(Model $model)
+    {
+        return $model->user_id == $this->id;
     }
 }
