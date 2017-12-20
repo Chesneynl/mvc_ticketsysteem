@@ -15,7 +15,7 @@ class TicketController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('admin');
+        
     }
 
     /**
@@ -27,8 +27,7 @@ class TicketController extends Controller
     {
         $group_ids = $request->groups ?? [];
 
-        $tickets = Auth::user()->tickets()
-            ->whereIn('group_id', $group_ids)->get();
+        $tickets = Auth::user()->tickets;
 
         return view('tickets.index', compact('tickets'));
     }
@@ -64,7 +63,8 @@ class TicketController extends Controller
     {
         abort_unless($request->user()->isAdmin() || $request->user()->owns($ticket), 404);
 
-        return $ticket;
+        return view('tickets.ticket.index', compact('ticket'));
+
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\Ticket;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $group_ids = $request->groups ?? [];
+
+        
+        $tickets = Auth::user()->tickets;
+        return view('home', compact('tickets'));
     }
 }

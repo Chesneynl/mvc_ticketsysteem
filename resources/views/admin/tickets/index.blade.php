@@ -8,10 +8,19 @@
 
             <div class="panel-body">
                 <div class="panel-title">
-                    <h2>Dashboard</h2>
-         
+                    <h2>Tickets</h2>
                 </div>
-
+                <div class="filters">
+                  <div class="filter support col-md-4" >
+                    Support
+                  </div>
+                  <div class="filter front-end col-md-4" >
+                    Front-end
+                  </div>
+                  <div class="filter back-end col-md-4" >
+                    Back-end
+                  </div>
+                </div>
                 @if (!count($tickets))
                     <div class="alert alert-warning">no tickets found!</div>
                 @else
