@@ -18,7 +18,6 @@
                         Aangemaakt op : {{ $ticket->created_at  }}
                     </div>
                 </div>
-                <a href="/admin/tickets/edit/{{$ticket->id}}">Edit ticket</a>
             </div>
           </div>
       </div>

@@ -13,9 +13,27 @@ class TicketController extends Controller
      */
     public function index()
     {
-        $ticket->status = 'closed';
+        //$ticket->status = 'closed';
 
         $tickets = Ticket::all();
         return view('admin.tickets.index', compact('tickets'));
+    }
+
+     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $ticket =  Ticket::find($id);
+
+        return view('admin.tickets.ticket.edit', compact('ticket'));
+    }
+
+    public function create()
+    {
+        return view('admin.tickets.ticket.create');
     }
 }

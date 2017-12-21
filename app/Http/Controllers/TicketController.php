@@ -64,7 +64,6 @@ class TicketController extends Controller
         abort_unless($request->user()->isAdmin() || $request->user()->owns($ticket), 404);
 
         return view('tickets.ticket.index', compact('ticket'));
-
     }
 
     /**

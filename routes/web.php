@@ -27,5 +27,9 @@ Route::get('tickets/{ticket}', 'TicketController@show');
 Route::middleware(['admin'])->prefix('admin')->namespace('Admin')->group(function () {
 
     Route::get('tickets', 'TicketController@index');
-    Route::get('users', 'TicketController@index');
+    Route::get('tickets/edit/{ticket}', 'TicketController@edit');
+    Route::get('tickets/create/', 'TicketController@create');
+    Route::get('users', 'UserController@index');
+    Route::get('users/{user}', 'UserController@show');
+    Route::get('users/edit/{user}', 'UserController@edit');
 });
