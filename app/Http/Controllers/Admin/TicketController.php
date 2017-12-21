@@ -31,9 +31,13 @@ class TicketController extends Controller
 
         return view('admin.tickets.ticket.edit', compact('ticket'));
     }
-
-    public function create()
+    
+    protected function create(array $data)
     {
-        return view('admin.tickets.ticket.create');
+        return Ticket::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
     }
 }
