@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller
-{  
+{
     /**
      * Show all the tickets!
      */
@@ -31,10 +31,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, User $user)
     {
-        $user =  User::find($id);
-
         return view('admin.users.user.edit', compact('user'));
     }
 }

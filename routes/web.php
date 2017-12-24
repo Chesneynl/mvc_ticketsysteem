@@ -27,9 +27,13 @@ Route::get('tickets/{ticket}', 'TicketController@show');
 Route::middleware(['admin'])->prefix('admin')->namespace('Admin')->group(function () {
 
     Route::get('tickets', 'TicketController@index');
-    Route::get('tickets/edit/{ticket}', 'TicketController@edit');
+    Route::get('tickets/support', 'TicketController@filter');
+    Route::get('tickets/ticket/{ticket}/edit/', 'TicketController@edit');
+    Route::get('tickets/ticket/{ticket}/delete', 'TicketController@delete');
     Route::get('tickets/create/', 'TicketController@create');
+    Route::post('tickets', 'TicketController@store');
+    Route::post('tickets/ticket/{ticket}/edit/', 'TicketController@update');
     Route::get('users', 'UserController@index');
     Route::get('users/{user}', 'UserController@show');
-    Route::get('users/edit/{user}', 'UserController@edit');
+    Route::get('users/{user}/edit/', 'UserController@edit');
 });

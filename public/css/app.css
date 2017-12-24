@@ -50,11 +50,17 @@
   text-align:center;
   padding:15px 0;
   text-transform: uppercase;
+  cursor:pointer;
 }
 
-.filter:hover {
-  background-color: #fdfdfd;
-  cursor:pointer;
+.filter:hover{
+  background-color: #f7f7f7;
+  -webkit-transition: background-color 0.5s; /* Safari */
+   transition: background-color 0.5s;
+}
+
+.filter.active {
+  background-color: #f7f7f7;
 }
 
 .filter.support {
@@ -74,6 +80,33 @@
     width:100%;
 }
 
+.panel-title {
+  position:relative;
+}
+
+.panel-title .buttons{
+  position:absolute;
+  right:0;
+  top:0;
+}
+
+select {
+  height: 36px;
+}
+
+textarea {
+  height: 150px;
+}
+
+select,
+textarea  {
+  width: 100%;
+  padding: 6px 12px;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccd0d2;
+  border-radius: 4px;
+}
 
 
 

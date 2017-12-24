@@ -30,7 +30,7 @@ class User extends Authenticatable
 
     /**
      * Check if the user is a admin
-     * 
+     *
      * @return bool
      */
     public function isAdmin()
@@ -39,7 +39,37 @@ class User extends Authenticatable
     }
 
     /**
-     * 
+     * Check if the user is a support
+     *
+     * @return bool
+     */
+    public function isSupport()
+    {
+        return $this->group == "support";
+    }
+
+    /**
+     * Check if the user is a front-end
+     *
+     * @return bool
+     */
+    public function isFrontEnd()
+    {
+        return $this->group == "front-end";
+    }
+
+    /**
+     * Check if the user is a back-end
+     *
+     * @return bool
+     */
+    public function isBackEnd()
+    {
+        return $this->group == "back-end";
+    }
+
+    /**
+     *
      */
     public function tickets()
     {
@@ -48,7 +78,7 @@ class User extends Authenticatable
 
     /**
      * Check if the user owns the model
-     * 
+     *
      * @return bool
      */
     public function owns(Model $model)
