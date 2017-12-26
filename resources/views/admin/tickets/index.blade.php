@@ -26,6 +26,14 @@
                     Back-end
                   </div>
                 </div>
+                <form class="form-horizontal search_bar_wrapper" method="GET" action="/admin/tickets/search">
+                      <div class="search_bar">
+                          <input id="search" type="text" class="form-control" name="searchItem" placeholder="Search" >
+                          <button>
+                              <i class="fa fa-search" aria-hidden="true"></i>
+                          </button>
+                      </div>
+                </form>
                 @if ($message)
                   <div class="alert alert-warning">
                       {{$message}}

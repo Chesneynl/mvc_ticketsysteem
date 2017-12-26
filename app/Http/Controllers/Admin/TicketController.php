@@ -60,29 +60,15 @@ class TicketController extends Controller
        return view('admin.tickets.ticket.edit', compact('ticket', 'users'));
    }
 
-   /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function filterFrontEnd(Request $request)
-  {
-      $tickets = Ticket::all();
-      $message = "";
-      return view('admin.tickets.index', compact('tickets', 'message'));
-  }
-
    public function update(Request $request, Ticket $ticket)
    {
        $ticket->update([
          'name' => request('name'),
          'user_id' => request('user_id'),
          'group' => request('group'),
+         'status' => request('status'),
          'description' => request('description')
        ]);
-
-       $ticket->staus = request('status');
 
        $tickets   = Ticket::all();
        $message = "Ticket updated succesfully";
@@ -104,29 +90,25 @@ class TicketController extends Controller
    public function delete(Request $request, Ticket $ticket)
    {
        $ticket->delete();
-       $tickets   = Ticket::all();
+       $tickets = Ticket::all();
        $message = "Ticket deleted succesfully.";
 
        return view('admin.tickets.index', compact('tickets', 'message'));
    }
 
-    /*
+   /**
+    * Show all the tickets!
+    */
+   public function search(Request $request)
+   {
+       $message = "";
+       if ($request->has('searchItem')) {
+         $tickets = Ticket::where('name','LIKE', '%'. $request->get('searchItem') .'%')->get();
+       }
+       else {
+         $message = "No tickets found.";
+       }
 
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
-    }
-
-    protected function create(array $data)
-    {
-        return Ticket::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
-    }*/
+       return view('admin.tickets.index', compact('tickets', 'message', 'request'));
+   }
 }
