@@ -11,6 +11,11 @@
     margin-bottom:5px;
 }
 
+.ticket_section {
+  float: left;
+  width: 100%;
+}
+
 .ticket .title  {
   font-size:22px;
 }

@@ -16,14 +16,14 @@
                     </div>
                 </div>
                 <div class="ticket_details">
-                    <div class="status">
-                        {{ $ticket->status  }}
-                    </div>
-                    <div class="created_at">
-                        Aangemaakt op : {{ $ticket->created_at  }}
+                    <div class="ticket_information">
+                        <strong> Status :</strong> {{ $ticket->status  }} <br />
+                        <strong> Created at :</strong> {{ $ticket->created_at  }} <br />
+                        <strong> Completion date :</strong> {{ $ticket->completion_date  }} <br />
+                        <strong> Website :</strong> {{ $ticket->website  }} <br /> <br />
                     </div>
                     <div class="description">
-                        Description : <br /> {{ $ticket->description  }}
+                        <strong>Description : </strong><br /> {{ $ticket->description  }}
                     </div>
                 </div>
             </div>

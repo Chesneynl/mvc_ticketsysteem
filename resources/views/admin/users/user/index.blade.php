@@ -21,6 +21,7 @@
                 </div>
                 <div class="panel-title">
                     <h2>Tickets</h2>
+                    <hr>
                 </div>
                 @if (!count($tickets))
                     <div class="alert alert-warning">No tickets found!</div>

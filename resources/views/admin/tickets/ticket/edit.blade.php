@@ -25,19 +25,29 @@
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('group') ? ' has-error' : '' }}">
-                        <label for="name" class="col-md-4 control-label">Group</label>
+                    <div class="form-group{{ $errors->has('website') ? ' has-error' : '' }}">
+                        <label for="website" class="col-md-4 control-label">Website</label>
 
                         <div class="col-md-6">
-                          <select name="group">
-                              <option value="front-end">Front-end</option>
-                              <option value="back-end">Back-end</option>
-                              <option value="support">Support</option>
-                          </select>
+                            <input id="website" type="text" class="form-control" name="website" value="{{ $ticket->website }}" >
 
-                            @if ($errors->has('name'))
+                            @if ($errors->has('website'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('name') }}</strong>
+                                    <strong>{{ $errors->first('website') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('completion_date') ? ' has-error' : '' }}">
+                        <label for="completion_date" class="col-md-4 control-label">Completion date</label>
+
+                        <div class="col-md-6">
+                            <input id="datepicker" type="text" class="form-control" name="completion_date" value="{{ $ticket->completion_date }}" >
+
+                            @if ($errors->has('completion_date'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('completion_date') }}</strong>
                                 </span>
                             @endif
                         </div>
@@ -71,9 +81,10 @@
 
                         <div class="col-md-6">
                             <select name="status">
-                                <option value="pending">Pending</option>
+                                <option value="" disabled selected>Select status</option>
+                                <option value="Planned in">Planned in</option>
                                 <option value="is working on">Is working on</option>
-                                <option value="done">Done</option>
+                                <option value="Done">Done</option>
                             </select>
 
                             @if ($errors->has('status'))

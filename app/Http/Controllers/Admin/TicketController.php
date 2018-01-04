@@ -34,15 +34,27 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-      $this->validate(request(), [
-        'name' => 'required',
-      ]);
+        $this->validate(request(), [
+          'name'             => 'required',
+          'website'          => 'required',
+          'completion_date'  => 'required|date',
+          'user_id'          => 'required',
+          'description'      => 'required',
+        ]);
+
+        $user_group = User::find(request('user_id'))->group;
+
+        $originalDate = request('completion_date');
+        $newDate = date("Y-m-d", strtotime($originalDate));
 
         Ticket::create([
           'name' => request('name'),
+          'website' => request('website'),
+          'completion_date' => $newDate,
+          'description' => request('description'),
           'user_id' => request('user_id'),
-          'group' => request('group'),
-          'status' => "Nog in te plannen",
+          'group' => $user_group,
+          'status' => "Planned in",
         ]);
 
         return redirect('/admin/tickets');
@@ -62,12 +74,27 @@ class TicketController extends Controller
 
    public function update(Request $request, Ticket $ticket)
    {
+       $this->validate(request(), [
+         'name'             => 'required',
+         'website'          => 'required',
+         'completion_date'  => 'required|date',
+         'user_id'          => 'required',
+         'description'      => 'required',
+       ]);
+
+       $user_group = User::find(request('user_id'))->group;
+
+       $originalDate = request('completion_date');
+       $newDate = date("Y-m-d", strtotime($originalDate));
+
        $ticket->update([
          'name' => request('name'),
+         'website' => request('website'),
+         'completion_date' => $newDate,
+         'description' => request('description'),
          'user_id' => request('user_id'),
-         'group' => request('group'),
+         'group' => $user_group,
          'status' => request('status'),
-         'description' => request('description')
        ]);
 
        $tickets   = Ticket::all();

@@ -15,11 +15,39 @@
                         <label for="name" class="col-md-4 control-label">Name</label>
 
                         <div class="col-md-6">
-                            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" >
+                            <input  type="text" class="form-control" name="name" value="{{ old('name') }}" >
 
                             @if ($errors->has('name'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('name') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('website') ? ' has-error' : '' }}">
+                        <label for="website" class="col-md-4 control-label">Website</label>
+
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="website" value="{{ old('website') }}" >
+
+                            @if ($errors->has('website'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('website') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('completion_date') ? ' has-error' : '' }}">
+                        <label for="completion_date" class="col-md-4 control-label">Completion date</label>
+
+                        <div class="col-md-6">
+                            <input id="datepicker" type="text" class="form-control" name="completion_date" value="{{ old('completion_date') }}" >
+
+                            @if ($errors->has('completion_date'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('completion_date') }}</strong>
                                 </span>
                             @endif
                         </div>
@@ -30,9 +58,11 @@
 
                         <div class="col-md-6">
                             <select name="user_id">
-
+                              <option value="" disabled selected>Select user</option>
                               @foreach ($users as $user)
-                                <option value="{{$user->id}}">{{$user->name}}</option>
+                                @if (!$user->isAdmin())
+                                  <option value="{{$user->id}}">{{$user->name}}</option>
+                                @endif
                               @endforeach
                             </select>
 
@@ -44,19 +74,15 @@
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
-                        <label for="status" class="col-md-4 control-label">Status </label>
+                    <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                        <label for="description" class="col-md-4 control-label">Description</label>
 
                         <div class="col-md-6">
-                            <select name="status">
-                                <option value="Nog in te plannen">Nog in te plannen</option>
-                                <option value="Op te pakken">Op te pakken</option>
-                                <option value="Gedaan">Gedaan</option>
-                            </select>
+                            <textarea name="description"></textarea>
 
-                            @if ($errors->has('status'))
+                            @if ($errors->has('description'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('status') }}</strong>
+                                    <strong>{{ $errors->first('description') }}</strong>
                                 </span>
                             @endif
                         </div>

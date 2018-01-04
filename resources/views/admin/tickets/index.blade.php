@@ -45,7 +45,8 @@
                     @foreach ($tickets as $ticket)
                     <div class="ticket {{ $ticket->group  }} col-md-4 " onclick="location.href='/tickets/{{$ticket->id}}';">
                         <div class="title">{{$ticket->name }}</div>
-                        <div class="status">{{$ticket->status }}</div>
+                        <div class="completion_date">{{$ticket->completion_date }}</div>
+                        <div class="status">{{$ticket->website}}</div>
                     </div>
                     @endforeach
                 @endif
