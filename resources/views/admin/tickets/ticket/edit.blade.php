@@ -83,7 +83,7 @@
                             <select name="status">
                                 <option value="" disabled selected>Select status</option>
                                 <option value="Planned in">Planned in</option>
-                                <option value="is working on">Is working on</option>
+                                <option value="Is working on">Is working on</option>
                                 <option value="Done">Done</option>
                             </select>
 

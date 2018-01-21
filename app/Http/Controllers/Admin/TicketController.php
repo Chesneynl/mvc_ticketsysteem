@@ -118,7 +118,7 @@ class TicketController extends Controller
          'status' => request('status'),
        ]);
 
-       $tickets = Ticket::all();
+       $tickets = Ticket::orderBy('completion_date','ASC')->get();
        $message = "Ticket updated succesfully";
 
        return view('admin.tickets.index', compact('tickets', 'message'));
@@ -138,7 +138,7 @@ class TicketController extends Controller
    public function delete(Request $request, Ticket $ticket)
    {
        $ticket->delete();
-       $tickets = Ticket::all();
+       $tickets = Ticket::orderBy('completion_date','ASC')->get();
        $message = "Ticket deleted succesfully.";
 
        return view('admin.tickets.index', compact('tickets', 'message'));
