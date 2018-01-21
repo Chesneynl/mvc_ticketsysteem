@@ -6,6 +6,7 @@ use App\Ticket;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Session;
 
 class TicketController extends Controller
 {
@@ -14,17 +15,36 @@ class TicketController extends Controller
      */
     public function index(Request $request)
     {
-        //dd($request);
-        if ($request->has('filter')) {
-          $tickets = Ticket::all()->where('group',$request->get('filter'));
+
+      if ($request->has('hide_done_tickets') && $request->get('hide_done_tickets')) {
+        Session::put('hide_done_tickets', 1);
+      }
+      else if ($request->has('hide_done_tickets') && $request->get('hide_done_tickets') == 0) {
+        Session::put('hide_done_tickets', 0);
+      }
+
+      if ($request->has('filter')) {
+          if (session('hide_done_tickets')) {
+              $tickets = Ticket::where('group',$request->get('filter'))->orderBy('completion_date','ASC')->whereNotIn('status', ['Done'])->get();
+          }
+          else {
+              $tickets = Ticket::where('group',$request->get('filter'))->orderBy('completion_date','ASC')->get();
+          }
+      }
+      else {
+        if (session('hide_done_tickets')) {
+            $tickets = Ticket::orderBy('completion_date','ASC')->whereNotIn('status', ['Done'])->get();
         }
         else {
-          $tickets = Ticket::all();
+              $tickets = Ticket::orderBy('completion_date','ASC')->get();
         }
+      }
+
 
         $message = "";
         return view('admin.tickets.index', compact('tickets', 'message', 'request'));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -80,6 +100,7 @@ class TicketController extends Controller
          'completion_date'  => 'required|date',
          'user_id'          => 'required',
          'description'      => 'required',
+         'status'           => 'required',
        ]);
 
        $user_group = User::find(request('user_id'))->group;
@@ -97,7 +118,7 @@ class TicketController extends Controller
          'status' => request('status'),
        ]);
 
-       $tickets   = Ticket::all();
+       $tickets = Ticket::all();
        $message = "Ticket updated succesfully";
 
        return view('admin.tickets.index', compact('tickets', 'message'));

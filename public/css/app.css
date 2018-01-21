@@ -11,6 +11,29 @@
     margin-bottom:5px;
 }
 
+
+.ticket:after {
+  content: "";
+  height: 10px;
+  width: 10px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  border-radius: 50%;
+}
+
+.ticket.Planned.in:after {
+  background: red;
+}
+
+.ticket.is.working.on:after {
+  background:orange;
+}
+
+.ticket.Done:after {
+  background: green;
+}
+
 .ticket_section {
   float: left;
   width: 100%;

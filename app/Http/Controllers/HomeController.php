@@ -25,10 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $group_ids = $request->groups ?? [];
-
-        
         $tickets = Auth::user()->tickets;
-        return view('home', compact('tickets'));
+        return view('tickets.index', compact('tickets'));
     }
 }

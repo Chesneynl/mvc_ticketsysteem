@@ -11,8 +11,19 @@
                     <h2>{{$ticket->name }}</h2>
                     <hr>
                     <div class="buttons">
+                      @if (Auth::user()->isAdmin() )
                       <a class="btn btn-warning" href="/admin/tickets/ticket/{{$ticket->id}}/edit/">Edit ticket</a>
                       <a class="btn btn-danger" href="/admin/tickets/ticket/{{$ticket->id}}/delete">Delete ticket</a>
+                      @else
+                        @if ($ticket->isPlannedIn())
+                          <a class="btn btn-success" href="/tickets/{{$ticket->id}}/update-status/">Mark as started</a>
+
+                        @elseif ($ticket->isWorkingOn())
+                          <a class="btn btn-success" href="/tickets/{{$ticket->id}}/update-status/">Mark as done</a>
+                        @else
+                          Task is done
+                        @endif
+                      @endif
                     </div>
                 </div>
                 <div class="ticket_details">

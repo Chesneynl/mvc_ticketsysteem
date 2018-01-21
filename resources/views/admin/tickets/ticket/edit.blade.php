@@ -61,9 +61,9 @@
 
                               @foreach ($users as $user)
                                 @if ($ticket->user_id == $user->id)
-                                  <option value="{{$user->id}}">{{$user->name}}</option>
-                                @else
                                   <option selected value="{{$user->id}}">{{$user->name}}</option>
+                                @else
+                                  <option value="{{$user->id}}">{{$user->name}}</option>
                                 @endif
                               @endforeach
                             </select>

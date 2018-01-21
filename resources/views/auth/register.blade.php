@@ -39,6 +39,24 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('group') ? ' has-error' : '' }}">
+                            <label for="group" class="col-md-4 control-label">Group</label>
+                            <div class="col-md-6">
+                                <select name="group">
+                                    <option value="" disabled selected>Select group</option>
+                                    <option value="front-end">Front-end</option>
+                                    <option value="back-end">Back-end</option>
+                                    <option value="support">Support</option>
+                                </select>
+
+                                @if ($errors->has('group'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('group') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 

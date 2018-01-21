@@ -35,4 +35,21 @@ class UserController extends Controller
     {
         return view('admin.users.user.edit', compact('user'));
     }
+
+    public function update(Request $request, User $user)
+    {
+        $this->validate(request(), [
+          'name'             => 'required',
+          'email'            => 'required|email',
+          'group'            => 'required',
+        ]);
+
+        $user->update([
+          'name' => request('name'),
+          'email' => request('email'),
+          'group' => request('group'),
+        ]);
+
+        return redirect('/admin/users');
+    }
 }

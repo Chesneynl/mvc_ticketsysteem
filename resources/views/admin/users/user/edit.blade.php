@@ -8,7 +8,7 @@
           <div class="panel panel-default col-md-8 col-md-offset-2">
             <div class="panel-heading"><h2>Edit profile</h2></div>
             <div class="panel-body ">
-                <form class="form-horizontal" method="POST" action="/admin/tickets">
+                <form class="form-horizontal" method="POST" action="/admin/users/{{$user->id}}/edit">
                     {{ csrf_field() }}
 
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -46,6 +46,7 @@
 
                         <div class="col-md-6">
                             <select name="group">
+                                <option value="" disabled selected>Select group</option>
                                 <option value="front-end">Front-end</option>
                                 <option value="back-end">Back-end</option>
                                 <option value="support">Support</option>
@@ -58,22 +59,6 @@
                             @endif
                         </div>
                     </div>
-
-                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                        <label for="status" class="col-md-4 control-label">New password</label>
-
-                        <div class="col-md-6">
-                            <input id="password" type="password" class="form-control" name="password" value="{{ $user->password }}" >
-
-                            @if ($errors->has('password'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-
-
 
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">

@@ -11,6 +11,11 @@
                     <h2>Tickets</h2>
                     <hr>
                     <div class="buttons">
+                      @if (session('hide_done_tickets'))
+                        <a class="btn btn-info" href="/admin/tickets?hide_done_tickets=0">Show finished tickets</a>
+                      @else
+                        <a class="btn btn-info" href="/admin/tickets?hide_done_tickets=1">Hide finished tickets</a>
+                      @endif
                       <a class="btn btn-success" href="/admin/tickets/create/">Create ticket</a>
                     </div>
                 </div>
@@ -43,7 +48,7 @@
                     <div class="alert alert-warning">no tickets found!</div>
                 @else
                     @foreach ($tickets as $ticket)
-                    <div class="ticket {{ $ticket->group  }} col-md-4 " onclick="location.href='/tickets/{{$ticket->id}}';">
+                    <div class="ticket {{ $ticket->group  }} {{ $ticket->status }}  col-md-4 " onclick="location.href='/tickets/{{$ticket->id}}';">
                         <div class="title">{{$ticket->name }}</div>
                         <div class="completion_date">{{$ticket->completion_date }}</div>
                         <div class="status">{{$ticket->website}}</div>

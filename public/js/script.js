@@ -16,6 +16,14 @@ $( document ).ready(function() {
 
   $("#datepicker").datepicker();
 
+  $( ".ticket .completion_date" ).each(function( index ) {
+    var dateAr = $(this).text().split('-');
+    var newDate = dateAr[2] + '-' + dateAr[1] + '-20' + dateAr[0].slice(-2);
+
+    $(this).text(newDate);
+  });
+
+
 });
 
 var getUrlParameter = function getUrlParameter(sParam) {

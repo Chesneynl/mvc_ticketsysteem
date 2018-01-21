@@ -30,10 +30,11 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
+
+                      <a class="navbar-brand" href="{{ url('/') }}">
+                          MVC Ticketsysteem
+                      </a>
+
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -49,7 +50,7 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                        @if (Auth::user()->isAdmin() )
+                        @if (Auth::user()->isAdmin())
                             <li><a href="/admin/tickets">Tickets</a></li>
                             <li><a href="/admin/users">Users</a></li>
                         @endif
@@ -72,7 +73,7 @@
                                     </li>
                                 </ul>
                             </li>
-                        @endguest
+                      @endguest
                     </ul>
                 </div>
             </div>

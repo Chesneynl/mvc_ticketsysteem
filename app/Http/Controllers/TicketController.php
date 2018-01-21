@@ -31,16 +31,6 @@ class TicketController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -53,40 +43,33 @@ class TicketController extends Controller
         return view('tickets.ticket.index', compact('ticket'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function delete(Request $request, Ticket $ticket)
     {
+        $ticket->delete();
+        $tickets = Ticket::all();
+        $message = "Ticket deleted succesfully.";
 
-        $ticket =  Ticket::find($id);
-
-        return view('admin.tickets.ticket.edit', compact('ticket'));
+        return view('admin.tickets.index', compact('tickets', 'message'));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
+     * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function updateStatus(Request $request, Ticket $ticket)
     {
-        //
+        if ($ticket->status == "Planned in") {
+            $ticket->update([
+              'status' => 'Is working on',
+            ]);
+        }
+        else if ($ticket->status == "Is working on") {
+            $ticket->update([
+              'status' => 'Done',
+            ]);
+        }
+        return redirect('tickets');
     }
 }

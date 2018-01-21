@@ -14,7 +14,7 @@
                     <hr>
                 </div>
                   @foreach ($users as $user)
-                    @if ($user->isFrontEnd())
+                    @if ($user->isFrontEnd() && !$user->isAdmin())
                       <div class="col-md-4 ticket {{$user->group}}" onclick="location.href='/admin/users/{{$user->id}}';">
                           <div class="title">{{$user->name }}</div>
                           <div class="open_tickets"> Open tickets : {{count($user->tickets) }} </div>
@@ -30,7 +30,7 @@
                 </div>
                 <div class="ticket_section">
                   @foreach ($users as $user)
-                    @if ($user->isBackEnd())
+                    @if ($user->isBackEnd() && !$user->isAdmin())
                       <div class="col-md-4 ticket {{$user->group}}" onclick="location.href='/admin/users/{{$user->id}}';">
                           <div class="title">{{$user->name }}</div>
                           <div class="open_tickets"> Open tickets : {{count($user->tickets) }} </div>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="ticket_section">
                   @foreach ($users as $user)
-                    @if ($user->isSupport())
+                    @if ($user->isSupport() && !$user->isAdmin())
                       <div class="col-md-4 ticket {{$user->group}}" onclick="location.href='/admin/users/{{$user->id}}';">
                           <div class="title">{{$user->name }}</div>
                           <div class="open_tickets"> Open tickets : {{count($user->tickets) }} </div>

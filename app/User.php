@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'group','password',
     ];
 
     /**
@@ -73,7 +73,7 @@ class User extends Authenticatable
      */
     public function tickets()
     {
-        return $this->hasMany('App\Ticket');
+        return $this->hasMany('App\Ticket')->orderBy('completion_date','ASC');
     }
 
     /**
